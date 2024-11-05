@@ -1,0 +1,26 @@
+package com.jsp.springboot_day1;
+
+public class Employee {
+	int id;
+	String name;
+	public Employee(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+	public Employee() {
+		super();
+	}
+
+	public static void main(String[] args) throws Exception {
+		Employee employee= new Employee();
+//		if(employee instanceof Employee)
+//			System.out.println("employee type");
+//		else 
+//			System.out.println("not employee type");/
+		
+		System.out.println(Class.forName(args[0]));
+	}
+
+}

@@ -1,0 +1,15 @@
+spring.application.name=spring-boot-self-test
+spring.datasource.url=jdbc:mysql://localhost:3306/springboot_self_test?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+server.port=9090
+spring.security.user.name=adil
+spring.security.user.password=adil
+
+
+
+
+
+
+

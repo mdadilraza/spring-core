@@ -1,0 +1,29 @@
+package com.jsp.springboot_day1;
+
+//package com.jsp.springboot_day1;
+
+public class Employee {
+    int id;
+    String name;
+
+    public Employee(int id, String name) {
+        super();
+        this.id = id;
+        this.name = name;
+    }
+
+    public Employee() {
+        super();
+    }
+
+    public static void main(String[] args) throws Exception {
+        Employee employee = new Employee();
+        // Load the class from the provided fully qualified name
+        Class clazz = Class.forName(args[0]);
+        // Check if the employee object is an instance of the loaded class
+        if (clazz.isInstance(employee))
+            System.out.println("employee type");
+        else
+            System.out.println("not employee type");
+    }
+}

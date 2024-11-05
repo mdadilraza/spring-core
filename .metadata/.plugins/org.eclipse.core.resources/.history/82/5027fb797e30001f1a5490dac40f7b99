@@ -1,0 +1,5 @@
+package com.jsp.springbootselftest.controller;
+
+public class HomeController {
+
+}

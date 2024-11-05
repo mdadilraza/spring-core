@@ -1,0 +1,101 @@
+package com.jsp.springbootselftest.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.jsp.springbootselftest.dao.StudentDao;
+import com.jsp.springbootselftest.dto.Student;
+import com.jsp.springbootselftest.exception.StudentIdNotFoundException;
+import com.jsp.springbootselftest.util.ResponseStructure;
+
+@Service
+public class StudentService {
+	@Autowired
+	StudentDao studentDao;
+	//saveStudent 
+	public ResponseEntity<ResponseStructure<Student>> saveStudent(Student student) {
+		ResponseStructure<Student> responseStructure = new ResponseStructure<Student>();
+		responseStructure.setStatusCode(HttpStatus.CREATED.value());
+		responseStructure.setMessage("Successfully Student save into database  ");
+		responseStructure.setData(studentDao.saveStudent(student));
+		
+		return new ResponseEntity<ResponseStructure<Student>>(responseStructure,HttpStatus.CREATED);
+		
+	}
+	
+	public ResponseEntity<ResponseStructure<Student>> fetchStudentById(int id) {
+	Student student	=studentDao.fetchStudentById(id);
+	if(student !=null) {
+		ResponseStructure<Student> responseStructure = new ResponseStructure<Student>();
+		responseStructure.setStatusCode(HttpStatus.FOUND.value());
+		responseStructure.setMessage("Successfully fetched Student from database  ");
+		responseStructure.setData(studentDao.fetchStudentById(id));
+		
+		return new ResponseEntity<ResponseStructure<Student>>(responseStructure,HttpStatus.FOUND);
+	}
+	else
+		throw new StudentIdNotFoundException();
+		
+	}
+	
+	public ResponseEntity<ResponseStructure<List<Student>>> fetchAllStudent() {
+		ResponseStructure<List<Student>> responseStructure = new ResponseStructure<List<Student>>();
+		responseStructure.setStatusCode(HttpStatus.FOUND.value());
+		responseStructure.setMessage("Successfully Student save into database  ");
+		responseStructure.setData(studentDao.fetchAllStudent());
+		
+		return new ResponseEntity<ResponseStructure<List<Student>>>(responseStructure,HttpStatus.FOUND);
+		
+	}
+	
+	public ResponseEntity<ResponseStructure<Student>> updateStudent(int oldId,Student newStudent) {
+		Student student	=studentDao.fetchStudentById(oldId);
+		if(student !=null) {
+		ResponseStructure<Student> responseStructure = new ResponseStructure<Student>();
+		responseStructure.setStatusCode(HttpStatus.OK.value());
+		responseStructure.setMessage("Successfully Student save into database  ");
+		responseStructure.setData(studentDao.updateStudent(oldId, newStudent));
+		
+		return new ResponseEntity<ResponseStructure<Student>>(responseStructure,HttpStatus.OK);
+		}
+		else
+			throw new StudentIdNotFoundException();
+	}
+	
+	public ResponseEntity<ResponseStructure<Student>> deleteStudent(int id) {
+		Student student	=studentDao.fetchStudentById(id);
+		if(student !=null) {
+		ResponseStructure<Student> responseStructure = new ResponseStructure<Student>();
+		responseStructure.setStatusCode(HttpStatus.OK.value());
+		responseStructure.setMessage("Successfully Student save into database  ");
+		responseStructure.setData(studentDao.delteStudent(id));
+		
+		return new ResponseEntity<ResponseStructure<Student>>(responseStructure,HttpStatus.OK);
+		}
+		else
+			throw new StudentIdNotFoundException();
+		
+	}
+	public ResponseEntity<ResponseStructure<Student>> addExistingStudentToExistingCollege(int studentId, int collegeId) {
+		
+		ResponseStructure<Student> responseStructure = new ResponseStructure<Student>();
+		responseStructure.setStatusCode(HttpStatus.OK.value());
+		responseStructure.setMessage("Successfully addedexistingStudentToExistingCollege   ");
+		responseStructure.setData(studentDao.addExistingStudentToExistingCollege(studentId, collegeId));
+		
+		return new ResponseEntity<ResponseStructure<Student>>(responseStructure,HttpStatus.OK);
+		}
+		
+	}
+		
+	
+	
+	
+	
+	
+
+
